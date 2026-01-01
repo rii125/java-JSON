@@ -151,6 +151,6 @@ public class DataJson {
 
     boolean check = false;
     public boolean isCheck() {
-        return this.check = true;
+        return check = true;
     }
 }

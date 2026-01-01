@@ -7,6 +7,12 @@ import Data.DataJson;
 public class Json {
     DataJson data =  new DataJson();
 
+    public Json() {
+        if(!data.isCheck()) {
+            throw new RuntimeException("先にDataJson.javaをインスタンス化してください。");
+        }
+    }
+
     /**
      * <p>{@code read(int)}メソッドはJSONファイルを読み込むときにのみ使用が推奨されています。readは読むことができるのはもちろん、値の変更を行うことができます。
      * <p>一方で、値の変更を望まない場合には{@link jsonPack.Json#readOnly(int)}の使用を推奨しています。
@@ -16,7 +22,7 @@ public class Json {
      * @throws IllegalArgumentException {@link Data.DataJson#authority(int, char)}の例外を参考
      * */
     public void read(int auth) {
-        if (!data.isCheck()) {
+        if (data.isCheck()) {
             final char authChar = 'r';
             data.authority(auth, authChar);
         } else {
@@ -32,7 +38,7 @@ public class Json {
      * @throws IllegalArgumentException {@link Data.DataJson#authority(int, char)}の例外を参考
      * */
     public final void readOnly(int auth) {
-        if (!data.isCheck()) {
+        if (data.isCheck()) {
             final char authChar = 'o';
             data.authority(auth,authChar);
         } else {
@@ -47,7 +53,7 @@ public class Json {
      * @throws IllegalArgumentException {@link Data.DataJson#authority(int, char)}の例外を参考
      * */
     public void write(int  auth) {
-        if (!data.isCheck()) {
+        if (data.isCheck()) {
             final char authChar = 'w';
             data.authority(auth, authChar);
         } else {
@@ -63,7 +69,7 @@ public class Json {
      * @throws IllegalArgumentException {@link Data.DataJson#authority(int, char)}の例外を参考
      * */
     public void conversion(int auth) {
-        if (!data.isCheck()) {
+        if (data.isCheck()) {
             final char authChar = 'c';
             data.authority(auth, authChar);
         } else {
