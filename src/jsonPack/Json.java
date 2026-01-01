@@ -6,11 +6,26 @@ import Data.DataJson;
 
 public class Json {
     DataJson data =  new DataJson();
+    JsonWrite write;
+    JsonRead read;
+    JsonReadOnly readOnly;
+    JsonConversion conversion;
+
+    String path = null;
+    public static String jsonData = """
+            {
+            
+            }
+            """;
 
     public Json() {
         if(!data.isCheck()) {
             throw new RuntimeException("先にDataJson.javaをインスタンス化してください。");
         }
+    }
+    public String getPath(String path) {
+        this.path = path;
+        return path;
     }
 
     /**
@@ -25,6 +40,7 @@ public class Json {
         if (data.isCheck()) {
             final char authChar = 'r';
             data.authority(auth, authChar);
+            write = new JsonWrite();
         } else {
             throw new RuntimeException("先にDataJson.javaをインスタンス化してください。");
         }
@@ -41,6 +57,7 @@ public class Json {
         if (data.isCheck()) {
             final char authChar = 'o';
             data.authority(auth,authChar);
+            readOnly = new JsonReadOnly();
         } else {
             throw new RuntimeException("先にDataJson.javaをインスタンス化してください。");
         }
@@ -56,6 +73,8 @@ public class Json {
         if (data.isCheck()) {
             final char authChar = 'w';
             data.authority(auth, authChar);
+            write = new JsonWrite();
+            write.getPath(path);
         } else {
             throw new RuntimeException("先にDataJson.javaをインスタンス化してください。");
         }
@@ -72,6 +91,7 @@ public class Json {
         if (data.isCheck()) {
             final char authChar = 'c';
             data.authority(auth, authChar);
+            conversion = new JsonConversion();
         } else {
             throw new RuntimeException("先にDataJson.javaをインスタンス化してください。");
         }

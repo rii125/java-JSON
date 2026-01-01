@@ -1,5 +1,7 @@
 package Data;
 
+import jsonPack.Json;
+
 import java.io.*;
 
 import static java.lang.System.out;
@@ -10,6 +12,8 @@ public class DataJson {
      * type : 型（int, float, string）
      * value : 値（型チェックも行えるようにする）
      */
+
+    public String path;
 
     String seed;
     final String[] type = {"int", "float", "string"};
@@ -41,25 +45,25 @@ public class DataJson {
             case 0 -> {
                 switch (auth) {
                     case 'r', 'o', 'w' -> { throw new JsonInstanceData("指定した数値は無効です。 指定した数値: " + listNum + "(" + authorityList[listNum] + ")"); }
-                    case 'c' -> { out.println("Accuses!!"); }
+                    case 'c' -> { out.println("Conversion in accuses!!"); }
                 }
             }
             case 1 -> {
                 switch (auth) {
                     case 'c', 'r', 'o' -> { throw new JsonInstanceData("指定した数値は無効です。 指定した数値: " + listNum + "(" + authorityList[listNum] + ")"); }
-                    case 'w' -> { out.println("Accuses!!"); }
+                    case 'w' -> { out.println("Writer in accuses!!"); }
                 }
             }
             case 2 -> {
                 switch (auth) {
                     case 'c', 'w', 'o' -> { throw new JsonInstanceData("指定した数値は無効です。 指定した数値: " + listNum + "(" + authorityList[listNum] + ")"); }
-                    case 'r' -> { out.println("Accuses!!"); }
+                    case 'r' -> { out.println("Reader in accuses!!"); }
                 }
             }
             case 3 -> {
                 switch (auth) {
                     case 'r', 'w', 'c' -> { throw new JsonInstanceData("指定した数値は無効です。 指定した数値: " + listNum + "(" + authorityList[listNum] + ")"); }
-                    case 'o' -> { out.println("Accuses!!"); }
+                    case 'o' -> { out.println("ReadOnly in accuses!!"); }
                 }
             }
             default -> {
@@ -94,8 +98,9 @@ public class DataJson {
      * }</pre>
      * @version 1.0.0
      * */
-    public void readJson(String path) throws InterruptedException {
+    public String readJson(String path) throws InterruptedException {
         File file = new File(path);
+        this.path = path;
         out.println("読み込み中...\n");
         Thread.sleep(1000);
         out.println("| " + path + " |");
@@ -113,10 +118,13 @@ public class DataJson {
             Thread.sleep(1500);
             out.println("ファイルが見つかりません: " + file.getAbsolutePath());
         }
+        return path;
     }
 
-    public void readJson(String path, boolean display) throws InterruptedException {
+    public String readJson(String path, boolean display) throws InterruptedException {
         File file = new File(path);
+        this.path = path;
+        setPath(this.path);
         out.println("読み込み中...\n");
         Thread.sleep(1000);
         if (display) {
@@ -135,10 +143,11 @@ public class DataJson {
                 Thread.sleep(1500);
                 out.println("ファイルが見つかりません: " + file.getAbsolutePath());
             }
+            return path;
         } else {
             if (file.exists()) {
                 try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-                    out.println(path + "の読み込み完了");
+                        out.println(path + "の読み込み完了");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -146,11 +155,16 @@ public class DataJson {
                 Thread.sleep(1500);
                 out.println("ファイルが見つかりません: " + file.getAbsolutePath());
             }
+            return path;
         }
     }
 
     boolean check = false;
     public boolean isCheck() {
         return check = true;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 }
