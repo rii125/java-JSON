@@ -16,8 +16,12 @@ public class Json {
      * @throws IllegalArgumentException {@link Data.DataJson#authority(int, char)}の例外を参考
      * */
     public void read(int auth) {
+        if (!data.isCheck()) {
             final char authChar = 'r';
             data.authority(auth, authChar);
+        } else {
+            throw new RuntimeException("先にDataJson.javaをインスタンス化してください。");
+        }
     }
     /**
      * <p>{@code readOnly(int)}メソッドは値の変更を行わずに読み取りにのみ使用することができます。読み取りには{@link jsonPack.Json#read(int)}もありますが、値の変更を行えることができます。
@@ -28,8 +32,12 @@ public class Json {
      * @throws IllegalArgumentException {@link Data.DataJson#authority(int, char)}の例外を参考
      * */
     public final void readOnly(int auth) {
-        final char authChar = 'o';
-        data.authority(auth,authChar);
+        if (!data.isCheck()) {
+            final char authChar = 'o';
+            data.authority(auth,authChar);
+        } else {
+            throw new RuntimeException("先にDataJson.javaをインスタンス化してください。");
+        }
     }
     /**
      * <p>{@code write(int)}メソッドは属性と値の両方を変更することができます。値を変更する目的であれば{@link jsonPack.Json#read(int)}を使用することを推奨します。
@@ -39,8 +47,12 @@ public class Json {
      * @throws IllegalArgumentException {@link Data.DataJson#authority(int, char)}の例外を参考
      * */
     public void write(int  auth) {
-        final char authChar = 'w';
-        data.authority(auth, authChar);
+        if (!data.isCheck()) {
+            final char authChar = 'w';
+            data.authority(auth, authChar);
+        } else {
+            throw new RuntimeException("先にDataJson.javaをインスタンス化してください。");
+        }
     }
     /**
      * <p>{@code conversion(int)}メソッドはJSONからJava形式、JavaからJSON形式に変換する機能を持っています。また、属性や値の変更を行うことができます。
@@ -51,8 +63,11 @@ public class Json {
      * @throws IllegalArgumentException {@link Data.DataJson#authority(int, char)}の例外を参考
      * */
     public void conversion(int auth) {
-        final char authChar = 'c';
-        data.authority(auth, authChar);
+        if (!data.isCheck()) {
+            final char authChar = 'c';
+            data.authority(auth, authChar);
+        } else {
+            throw new RuntimeException("先にDataJson.javaをインスタンス化してください。");
+        }
     }
-
 }

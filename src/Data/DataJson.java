@@ -22,6 +22,12 @@ public class DataJson {
         authority = authorityList[2];
     }
 
+    private static class JsonInstanceData extends RuntimeException {
+        public JsonInstanceData(String m) {
+            super(m);
+        }
+    }
+
     /**
      * <p>JSONファイルを読み書きするためには権限が必要になります。JSONをJava側で編集しようとしても権限によって制限がかけられるような仕様です。
      * <p>もし、権限を無視したい場合には直接編集するかオーバーライドが可能なメソッドを使用して変更することをお勧めします。
@@ -34,25 +40,25 @@ public class DataJson {
         switch (listNum) {
             case 0 -> {
                 switch (auth) {
-                    case 'r', 'o', 'w' -> { throw new RuntimeException("指定した数値は無効です。 指定した数値: " + listNum + "(" + authorityList[listNum] + ")"); }
+                    case 'r', 'o', 'w' -> { throw new JsonInstanceData("指定した数値は無効です。 指定した数値: " + listNum + "(" + authorityList[listNum] + ")"); }
                     case 'c' -> { out.println("Accuses!!"); }
                 }
             }
             case 1 -> {
                 switch (auth) {
-                    case 'c', 'r', 'o' -> { throw new RuntimeException("指定した数値は無効です。 指定した数値: " + listNum + "(" + authorityList[listNum] + ")"); }
+                    case 'c', 'r', 'o' -> { throw new JsonInstanceData("指定した数値は無効です。 指定した数値: " + listNum + "(" + authorityList[listNum] + ")"); }
                     case 'w' -> { out.println("Accuses!!"); }
                 }
             }
             case 2 -> {
                 switch (auth) {
-                    case 'c', 'w', 'o' -> { throw new RuntimeException("指定した数値は無効です。 指定した数値: " + listNum + "(" + authorityList[listNum] + ")"); }
+                    case 'c', 'w', 'o' -> { throw new JsonInstanceData("指定した数値は無効です。 指定した数値: " + listNum + "(" + authorityList[listNum] + ")"); }
                     case 'r' -> { out.println("Accuses!!"); }
                 }
             }
             case 3 -> {
                 switch (auth) {
-                    case 'r', 'w', 'c' -> { throw new RuntimeException("指定した数値は無効です。 指定した数値: " + listNum + "(" + authorityList[listNum] + ")"); }
+                    case 'r', 'w', 'c' -> { throw new JsonInstanceData("指定した数値は無効です。 指定した数値: " + listNum + "(" + authorityList[listNum] + ")"); }
                     case 'o' -> { out.println("Accuses!!"); }
                 }
             }
@@ -141,5 +147,10 @@ public class DataJson {
                 out.println("ファイルが見つかりません: " + file.getAbsolutePath());
             }
         }
+    }
+
+    boolean check = false;
+    public boolean isCheck() {
+        return this.check = true;
     }
 }
