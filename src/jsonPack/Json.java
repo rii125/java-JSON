@@ -1,5 +1,7 @@
 package jsonPack;
 
+import static java.lang.System.out;
+
 import Data.DataJson;
 
 public class Json {

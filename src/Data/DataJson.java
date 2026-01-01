@@ -15,7 +15,6 @@ public class DataJson {
     final String[] type = {"int", "float", "string"};
     String value;
 
-
     String authority;
     final String[] authorityList = {"Customer", "Writer", "Reader", "ReaderOnly"};
 
@@ -91,8 +90,10 @@ public class DataJson {
      * */
     public void readJson(String path) throws InterruptedException {
         File file = new File(path);
-        out.println("読み込み中...");
-        out.println("=============================================");
+        out.println("読み込み中...\n");
+        Thread.sleep(1000);
+        out.println("| " + path + " |");
+        out.println("=========================================================");
         if (file.exists()) {
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                 String line;
@@ -105,6 +106,40 @@ public class DataJson {
         } else {
             Thread.sleep(1500);
             out.println("ファイルが見つかりません: " + file.getAbsolutePath());
+        }
+    }
+
+    public void readJson(String path, boolean display) throws InterruptedException {
+        File file = new File(path);
+        out.println("読み込み中...\n");
+        Thread.sleep(1000);
+        if (display) {
+            out.println("| " + path + " |");
+            out.println("=========================================================");
+            if (file.exists()) {
+                try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        out.println(line);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Thread.sleep(1500);
+                out.println("ファイルが見つかりません: " + file.getAbsolutePath());
+            }
+        } else {
+            if (file.exists()) {
+                try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                    out.println(path + "の読み込み完了");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Thread.sleep(1500);
+                out.println("ファイルが見つかりません: " + file.getAbsolutePath());
+            }
         }
     }
 }
