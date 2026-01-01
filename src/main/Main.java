@@ -6,11 +6,11 @@ import jsonPack.Json;
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws InterruptedException {
         DataJson jsonD = new DataJson();
-        Json json = new Json();
-
         jsonD.readJson("src\\jsonTest\\test.json");
+
+        Json json = new Json();
 
         json.conversion(0);
         json.write(1);

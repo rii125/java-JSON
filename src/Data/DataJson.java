@@ -1,9 +1,6 @@
 package Data;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import static java.lang.System.out;
 
@@ -17,6 +14,7 @@ public class DataJson {
     String seed;
     final String[] type = {"int", "float", "string"};
     String value;
+
 
     String authority;
     final String[] authorityList = {"Customer", "Writer", "Reader", "ReaderOnly"};
@@ -91,8 +89,10 @@ public class DataJson {
      * }</pre>
      * @version 1.0.0
      * */
-    public void readJson(String path) {
+    public void readJson(String path) throws InterruptedException {
         File file = new File(path);
+        out.println("読み込み中...");
+        out.println("=============================================");
         if (file.exists()) {
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                 String line;
@@ -103,6 +103,7 @@ public class DataJson {
                 e.printStackTrace();
             }
         } else {
+            Thread.sleep(1500);
             out.println("ファイルが見つかりません: " + file.getAbsolutePath());
         }
     }

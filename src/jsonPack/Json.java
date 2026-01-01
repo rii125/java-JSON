@@ -14,8 +14,8 @@ public class Json {
      * @throws IllegalArgumentException {@link Data.DataJson#authority(int, char)}の例外を参考
      * */
     public void read(int auth) {
-        final char authChar = 'r';
-        data.authority(auth, authChar);
+            final char authChar = 'r';
+            data.authority(auth, authChar);
     }
     /**
      * <p>{@code readOnly(int)}メソッドは値の変更を行わずに読み取りにのみ使用することができます。読み取りには{@link jsonPack.Json#read(int)}もありますが、値の変更を行えることができます。
